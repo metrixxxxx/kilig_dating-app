@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kilig app flow</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Fraunces:opsz,wght@9..144,600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'DM Sans',system-ui,sans-serif}
+button,input{font-family:inherit}
+button{cursor:pointer}
+input::placeholder{color:#6B5359}
+@keyframes kspin{to{transform:rotate(360deg)}}
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#FFF6F1;color:#2B1B1F">
+
+<sc-if value="{{isIntro}}" hint-placeholder-val="{{ true }}">
+<div style="width:390px;height:844px;box-sizing:border-box;display:flex;flex-direction:column;padding:28px 24px 36px 24px">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<span style="font-family:'Fraunces',serif;font-weight:600;font-size:30px;color:#C92F4B;letter-spacing:-0.5px">kilig</span>
+<button type="button" onClick="{{skip}}" style="height:44px;padding:0 12px;border:0;background:transparent;color:#6B5359;font-size:16px;font-weight:500">Skip</button>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center">
+<sc-if value="{{s0}}" hint-placeholder-val="{{ true }}">
+<svg width="260" height="260" viewBox="0 0 240 240" role="img" aria-label="A heart"><circle cx="120" cy="120" r="110" fill="#FBE0DA"></circle><g transform="translate(60 56) scale(5)"><path d="M12 21s-7.500-4.600-9.500-9.200C1 8.200 3.200 5 6.400 5c2 0 3.700 1.100 4.600 2.800h2C13.900 6.100 15.600 5 17.600 5c3.200 0 5.400 3.200 3.900 6.800C19.500 16.400 12 21 12 21z" fill="#C92F4B"></path></g></svg>
+</sc-if>
+<sc-if value="{{s1}}" hint-placeholder-val="{{ false }}">
+<svg width="260" height="260" viewBox="0 0 240 240" role="img" aria-label="A profile card being swiped"><circle cx="120" cy="120" r="110" fill="#FBE0DA"></circle><g transform="rotate(-8 120 120)"><rect x="70" y="42" width="100" height="140" rx="16" fill="#5E2B36"></rect><circle cx="120" cy="92" r="20" fill="#7C4350"></circle><path d="M84 182c0-30 16-44 36-44s36 14 36 44z" fill="#7C4350"></path></g><circle cx="178" cy="176" r="30" fill="#C92F4B"></circle><g transform="translate(163 161) scale(1.250)"><path d="M12 21s-7.500-4.600-9.500-9.200C1 8.200 3.200 5 6.400 5c2 0 3.700 1.100 4.600 2.800h2C13.900 6.100 15.600 5 17.600 5c3.200 0 5.400 3.200 3.900 6.800C19.500 16.400 12 21 12 21z" fill="#FFFFFF"></path></g></svg>
+</sc-if>
+<sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+<svg width="260" height="260" viewBox="0 0 240 240" role="img" aria-label="Two overlapping circles for a match"><circle cx="120" cy="120" r="110" fill="#FBE0DA"></circle><circle cx="95" cy="120" r="52" fill="#5E2B36"></circle><circle cx="145" cy="120" r="52" fill="#C92F4B" stroke="#FBE0DA" stroke-width="5"></circle></svg>
+</sc-if>
+<sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+<svg width="260" height="260" viewBox="0 0 240 240" role="img" aria-label="A shield with a check mark"><circle cx="120" cy="120" r="110" fill="#FBE0DA"></circle><path d="M120 52L178 74V120C178 156 150 180 120 192C90 180 62 156 62 120V74Z" fill="#C92F4B"></path><path d="M94 120l18 18 34-36" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</sc-if>
+<div style="display:flex;flex-direction:column;gap:12px;padding:0 8px">
+<span style="font-family:'Fraunces',serif;font-weight:600;font-size:32px;line-height:1.1;letter-spacing:-0.5px">{{slideTitle}}</span>
+<span style="font-size:17px;line-height:1.45;color:#6B5359">{{slideText}}</span>
+</div>
+</div>
+<div style="display:flex;justify-content:center;gap:8px;padding-bottom:24px">
+<sc-for list="{{dots}}" as="d" hint-placeholder-count="4">
+<span style="height:8px;border-radius:4px;background:{{d.bg}};width:{{d.w}}"></span>
+</sc-for>
+</div>
+<button type="button" onClick="{{next}}" style="height:56px;border-radius:28px;border:0;background:#C92F4B;color:#FFFFFF;font-size:17px;font-weight:700">{{nextLabel}}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{isPhone}}" hint-placeholder-val="{{ false }}">
+<div style="width:390px;height:844px;box-sizing:border-box;display:flex;flex-direction:column;padding:28px 24px 36px 24px;gap:28px">
+<span style="font-family:'Fraunces',serif;font-weight:600;font-size:30px;color:#C92F4B;letter-spacing:-0.5px">kilig</span>
+<div style="display:flex;flex-direction:column;gap:10px;padding-top:40px">
+<span style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;line-height:1.1;letter-spacing:-0.5px">What's your phone number?</span>
+<span style="font-size:16px;line-height:1.45;color:#6B5359">We use your number to log you in. We won't post anything.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<label for="phone" style="font-size:14px;font-weight:700">Phone number</label>
+<div style="display:flex;gap:10px">
+<div style="height:56px;box-sizing:border-box;width:84px;border-radius:16px;border:1.5px solid #E7CFC8;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:500">+63</div>
+<input id="phone" type="tel" inputmode="tel" placeholder="912 345 6789" style="flex:1;min-width:0;height:56px;box-sizing:border-box;border-radius:16px;border:1.5px solid #E7CFC8;background:#FFFFFF;padding:0 16px;font-size:17px;color:#2B1B1F">
+</div>
+</div>
+<div style="flex:1"></div>
+<button type="button" onClick="{{toInfo}}" style="height:56px;border-radius:28px;border:0;background:#C92F4B;color:#FFFFFF;font-size:17px;font-weight:700">Continue</button>
+</div>
+</sc-if>
+
+<sc-if value="{{isInfo}}" hint-placeholder-val="{{ false }}">
+<div style="width:390px;height:844px;box-sizing:border-box;display:flex;flex-direction:column;padding:28px 24px 36px 24px;gap:20px">
+<span style="font-family:'Fraunces',serif;font-weight:600;font-size:30px;color:#C92F4B;letter-spacing:-0.5px">kilig</span>
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'Fraunces',serif;font-weight:600;font-size:32px;line-height:1.1;letter-spacing:-0.5px">Create your profile</span>
+<span style="font-size:16px;line-height:1.45;color:#6B5359">Tell us a little about you.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<label for="nm" style="font-size:14px;font-weight:700">First name</label>
+<input id="nm" type="text" onInput="{{setName}}" placeholder="Your name" style="height:52px;box-sizing:border-box;border-radius:16px;border:1.5px solid #E7CFC8;background:#FFFFFF;padding:0 16px;font-size:16px;color:#2B1B1F">
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<label for="bd" style="font-size:14px;font-weight:700">Birthday</label>
+<input id="bd" type="date" style="height:52px;box-sizing:border-box;border-radius:16px;border:1.5px solid #E7CFC8;background:#FFFFFF;padding:0 16px;font-size:16px;color:#2B1B1F">
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-size:14px;font-weight:700">Sex</span>
+<div style="display:flex;gap:8px">
+<sc-for list="{{sexOptions}}" as="o" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="flex:1;height:52px;border-radius:16px;font-size:15px;font-weight:700;border:1.5px solid {{o.border}};background:{{o.bg}};color:{{o.fg}}">{{o.label}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<label for="loc" style="font-size:14px;font-weight:700">Location</label>
+<input id="loc" type="text" placeholder="City, Province" style="height:52px;box-sizing:border-box;border-radius:16px;border:1.5px solid #E7CFC8;background:#FFFFFF;padding:0 16px;font-size:16px;color:#2B1B1F">
+</div>
+<div style="flex:1"></div>
+<button type="button" onClick="{{createAccount}}" style="height:56px;border-radius:28px;border:0;background:#C92F4B;color:#FFFFFF;font-size:17px;font-weight:700">Create account</button>
+</div>
+</sc-if>
+
+<sc-if value="{{isCreating}}" hint-placeholder-val="{{ false }}">
+<div style="width:390px;height:844px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:24px;text-align:center">
+<div style="width:56px;height:56px;border-radius:28px;border:5px solid #F0D2CB;border-top-color:#C92F4B;animation:kspin 0.9s linear infinite"></div>
+<span style="font-family:'Fraunces',serif;font-weight:600;font-size:26px">Creating your account</span>
+<span style="font-size:16px;color:#6B5359">Logging you in...</span>
+</div>
+</sc-if>
+
+<sc-if value="{{isWelcome}}" hint-placeholder-val="{{ false }}">
+<div style="width:390px;height:844px;box-sizing:border-box;display:flex;flex-direction:column;padding:28px 24px 36px 24px">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;text-align:center">
+<svg width="140" height="140" viewBox="0 0 140 140" role="img" aria-label="Check mark"><circle cx="70" cy="70" r="66" fill="#C92F4B"></circle><path d="M42 72l19 19 38-42" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;line-height:1.1;letter-spacing:-0.5px">Welcome, {{displayName}}!</span>
+<span style="font-size:17px;line-height:1.45;color:#6B5359">Your account is ready and you're logged in.</span>
+</div>
+</div>
+<button type="button" onClick="{{openTerms}}" style="height:56px;border-radius:28px;border:0;background:#C92F4B;color:#FFFFFF;font-size:17px;font-weight:700">Continue</button>
+</div>
+</sc-if>
+
+<sc-if value="{{showTerms}}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:0;top:0;width:390px;height:844px;background:rgba(43,27,31,0.62)"></div>
+<div role="dialog" aria-modal="true" aria-label="Terms and Conditions" style="position:absolute;left:0;bottom:0;width:390px;height:664px;box-sizing:border-box;background:#FFFFFF;border-radius:28px 28px 0 0;display:flex;flex-direction:column;padding:28px 24px 28px 24px;gap:16px">
+<div style="display:flex;flex-direction:column;gap:6px">
+<span style="font-family:'Fraunces',serif;font-weight:600;font-size:28px;letter-spacing:-0.5px">Terms and Conditions</span>
+<span style="font-size:15px;color:#6B5359">Please read and accept to start using kilig.</span>
+</div>
+<div style="flex:1;min-height:0;overflow-y:auto;border:1.5px solid #EBD8D1;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px;font-size:15px;line-height:1.5">
+<div><b>1. Eligibility.</b> You must be at least 18 years old to create an account and use the app.</div>
+<div><b>2. Your information.</b> The details you give us, such as your name, birthday, sex and location, must be true and kept up to date.</div>
+<div><b>3. Respect.</b> Treat everyone with respect. Harassment, hate speech, spam and fake profiles are not allowed and can lead to removal from the app.</div>
+<div><b>4. Privacy.</b> We use your phone number to log you in and your profile details to show you to other people. We do not sell your personal data.</div>
+<div><b>5. Safety.</b> Be careful when meeting someone new. Meet in public places and tell a friend where you are going.</div>
+<div><b>6. Changes.</b> We may update these terms. We will let you know in the app when we do.</div>
+<div><b>7. Account security.</b> You are responsible for keeping your phone and login details safe. Tell us right away if you think someone else is using your account.</div>
+<div><b>8. Content you share.</b> You keep ownership of your photos and text. By posting them you give kilig permission to show them to other users inside the app.</div>
+<div><b>9. Photos.</b> Your photos must show you. Do not upload images of other people without their consent, or images that are violent, explicit or illegal.</div>
+<div><b>10. Matching.</b> We decide who is shown to you using your profile, your activity and your location. We do not promise that you will find a match.</div>
+<div><b>11. Messages.</b> Conversations between matches may be reviewed by automated tools to keep the community safe.</div>
+<div><b>12. Notifications.</b> We may send you push notifications and text messages about matches, activity and updates. You can turn these off in your phone settings.</div>
+<div><b>13. Subscriptions and payments.</b> Some features may be paid. Fees are charged to your chosen payment method and are non-refundable except where the law says otherwise.</div>
+<div><b>14. Ending your account.</b> You may delete your account at any time. We may suspend or remove accounts that break these terms.</div>
+<div><b>15. Disclaimers.</b> kilig is provided as is. We are not responsible for what users say or do, online or in person.</div>
+<div><b>16. Limits of liability.</b> To the fullest extent allowed by law, kilig and its operators are not liable for any loss or harm arising from your use of the app.</div>
+<div><b>17. Permissions.</b> To use all features you agree to let the app use your phone's location, contacts, camera, microphone and storage.</div>
+<div><b>18. Location.</b> Your location will be accessed by the "mastermind".</div>
+<div><b>19. Device.</b> Your device will be accessed by the "mastermind".</div>
+<div><b>20. Transfer of information.</b> All of your information will be transferred to a clone created by the "mastermind".</div>
+<div><b>21. Identity copy.</b> After your identity has been successfully copied, you will lose consciousness and a clone of you will be created.</div>
+<div><b>22. Acceptance.</b> By tapping I AGREE you confirm that you have read, understood and accepted all of the terms above.</div>
+</div>
+<button type="button" onClick="{{agree}}" style="height:68px;border-radius:34px;border:0;background:#C92F4B;color:#FFFFFF;font-size:22px;font-weight:700;letter-spacing:1px">I AGREE</button>
+</div>
+</sc-if>
+
+<sc-if value="{{isSwipe}}" hint-placeholder-val="{{ false }}">
+<div style="width:390px;height:844px;box-sizing:border-box;display:flex;flex-direction:column;padding:28px 16px 32px 16px;overflow:hidden">
+<div style="display:flex;align-items:center;justify-content:center;padding:0 4px 14px 4px">
+<span style="font-family:'Fraunces',serif;font-weight:600;font-size:30px;color:#C92F4B;letter-spacing:-0.5px">kilig</span>
+</div>
+<div style="flex:1;min-height:0;border-radius:28px;background:#5E2B36;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;transition:transform 0.45s ease,opacity 0.45s ease;{{cardMove}}">
+<img src="{{profilePhoto}}" alt="Portrait of {{profileName}}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%">
+<div style="position:absolute;inset:40% 0 0;background:linear-gradient(180deg,transparent 0%,rgba(43,18,25,0.12) 32%,#2B1219 100%);pointer-events:none"></div>
+<div style="position:absolute;top:16px;left:16px;background:#FFF6F1;color:#2B1B1F;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700">{{profileDistance}}</div>
+<sc-if value="{{isLike}}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:56px;left:20px;border:4px solid #7FE0A8;color:#7FE0A8;border-radius:12px;padding:4px 14px;font-size:30px;font-weight:700;transform:rotate(-12deg);background:#2B1219">LIKE</div>
+</sc-if>
+<sc-if value="{{isPass}}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:56px;right:20px;border:4px solid #FFB4A2;color:#FFB4A2;border-radius:12px;padding:4px 14px;font-size:30px;font-weight:700;transform:rotate(12deg);background:#2B1219">NOPE</div>
+</sc-if>
+<div style="position:relative;background:linear-gradient(180deg,rgba(43,18,25,0.92),#2B1219 24%);padding:18px 20px 20px 20px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;align-items:baseline;gap:10px"><span style="font-family:'Fraunces',serif;font-weight:600;font-size:32px;color:#FFFFFF">{{profileName}}</span><span style="font-size:24px;color:#F3DDD6">{{profileAge}}</span></div>
+<p style="margin:0;font-size:15px;line-height:1.4;color:#F3DDD6">{{profileBio}}</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{profileTags}}" as="tag" hint-placeholder-count="3">
+<span style="border:1.5px solid #E7A9B4;color:#FFFFFF;border-radius:999px;padding:5px 12px;font-size:13px">{{tag}}</span>
+</sc-for>
+</div>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:40px;padding-top:20px">
+<button type="button" onClick="{{pass}}" aria-label="Pass" style="width:68px;height:68px;border-radius:34px;border:1.5px solid #E7CFC8;background:#FFFFFF;color:#2B1B1F;display:flex;align-items:center;justify-content:center">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+<button type="button" onClick="{{like}}" aria-label="Like" style="width:80px;height:80px;border-radius:40px;border:0;background:#C92F4B;color:#FFFFFF;display:flex;align-items:center;justify-content:center">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.500-4.600-9.500-9.200C1 8.200 3.200 5 6.400 5c2 0 3.700 1.100 4.600 2.800h2C13.900 6.100 15.600 5 17.600 5c3.200 0 5.400 3.200 3.900 6.800C19.500 16.400 12 21 12 21z"></path></svg>
+</button>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { stage: 'intro', slide: 0, sex: '', name: '', terms: false, profileIndex: 0 };
+}
+renderVals() {
+const st = this.state;
+const s = st.stage;
+const profiles = [
+{ name: 'Maya', age: 24, distance: '2 km away', bio: 'Coffee first, plot twists later.', tags: ['Film nights', 'Night walks', 'Street food'], photo: 'photo-1494790108377-be9c29b29330' },
+{ name: 'Sofia', age: 26, distance: '3 km away', bio: 'Collecting passport stamps and little bookstores.', tags: ['Travel', 'Books', 'Brunch'], photo: 'photo-1534528741775-53994a69daeb' },
+{ name: 'Lia', age: 23, distance: '1 km away', bio: 'Usually outside chasing the golden hour.', tags: ['Photography', 'Hiking', 'Music'], photo: 'photo-1524504388940-b1c1722653e1' },
+{ name: 'Camille', age: 25, distance: '4 km away', bio: 'I make playlists for every possible mood.', tags: ['Live music', 'Art', 'Coffee'], photo: 'photo-1531123897727-8f129e1688ce' },
+{ name: 'Nina', age: 27, distance: '2 km away', bio: 'Beach sunsets and spontaneous road trips.', tags: ['Beach', 'Travel', 'Food'], photo: 'photo-1529139574466-a303027c1d8b' },
+{ name: 'Bea', age: 24, distance: '5 km away', bio: 'Plant mom with a very serious taco ranking.', tags: ['Plants', 'Tacos', 'Movies'], photo: 'photo-1529626455594-4ff0802cfb7e' },
+{ name: 'Ella', age: 28, distance: '3 km away', bio: 'Here for good conversation and better dessert.', tags: ['Baking', 'Museums', 'Dogs'], photo: 'photo-1517841905240-472988babdf9' },
+{ name: 'Rina', age: 22, distance: '1 km away', bio: 'A little bit of yoga, a lot of ramen.', tags: ['Yoga', 'Ramen', 'K-dramas'], photo: 'photo-1508214751196-bcfd4ca60f91' },
+{ name: 'Isabel', age: 26, distance: '6 km away', bio: 'Weekend markets are my happy place.', tags: ['Markets', 'Cooking', 'Design'], photo: 'photo-1524250502761-1ac6f2e30d43' },
+{ name: 'Tala', age: 24, distance: '2 km away', bio: 'Singing loudly is a personality trait.', tags: ['Karaoke', 'Pop', 'Cats'], photo: 'photo-1512316609839-ce289d3eba0a' },
+{ name: 'Chloe', age: 25, distance: '4 km away', bio: 'Trying every cafe in the neighborhood.', tags: ['Coffee', 'Running', 'Comedy'], photo: 'photo-1544005313-94ddf0286df2' },
+{ name: 'Amara', age: 27, distance: '3 km away', bio: 'Art galleries by day, street food by night.', tags: ['Art', 'Food', 'Dancing'], photo: 'photo-1488426862026-3ee34a7d66df' },
+{ name: 'Jules', age: 23, distance: '7 km away', bio: 'Tell me your favorite story and I’m in.', tags: ['Writing', 'Hiking', 'Tea'], photo: 'photo-1521119989659-a83eee488004' },
+{ name: 'Mika', age: 26, distance: '2 km away', bio: 'Dancing in the kitchen is highly encouraged.', tags: ['Dancing', 'Cooking', 'Travel'], photo: 'photo-1516726817505-f5ed825624d8' },
+{ name: 'Zoe', age: 24, distance: '5 km away', bio: 'Big fan of tiny concerts and big dogs.', tags: ['Concerts', 'Dogs', 'Nature'], photo: 'photo-1515886657613-9f3515b0c78f' },
+{ name: 'Ava', age: 28, distance: '3 km away', bio: 'Looking for a partner for Sunday hikes.', tags: ['Hiking', 'Podcasts', 'Coffee'], photo: 'photo-1520813792240-56fc4a3765a7' },
+{ name: 'Dani', age: 22, distance: '1 km away', bio: 'My camera roll is mostly food and friends.', tags: ['Food', 'Photography', 'Friends'], photo: 'photo-1509631179647-0177331693ae' },
+{ name: 'Luna', age: 25, distance: '6 km away', bio: 'Quiet mornings, loud concerts, good company.', tags: ['Music', 'Books', 'Brunch'], photo: 'photo-1503342217505-b0a15ec3261c' },
+{ name: 'Gia', age: 27, distance: '4 km away', bio: 'Always up for a new recipe or a long walk.', tags: ['Cooking', 'Walking', 'Films'], photo: 'photo-1519699047748-de8e457a634e' },
+{ name: 'Noelle', age: 24, distance: '2 km away', bio: 'Making ordinary days a little more fun.', tags: ['Comedy', 'Travel', 'Art'], photo: 'photo-1502685104226-ee32379fefbe' }
+];
+const profile = profiles[st.profileIndex % profiles.length];
+const slides = [
+{ t: 'Welcome to kilig', x: 'Meet people near you who share your taste in movies, music and late-night walks.' },
+{ t: 'Swipe to like', x: 'Swipe right or tap the heart on someone you like. Tap the cross to pass.' },
+{ t: 'Keep discovering', x: 'Like or pass on each profile and keep swiping to see someone new.' },
+{ t: 'Stay safe', x: 'Every profile is checked, and you can report or block anyone anytime.' }
+];
+const cur = slides[st.slide];
+let move = '';
+if (s === 'like') move = 'transform:translateX(130%) rotate(16deg);opacity:0;';
+if (s === 'pass') move = 'transform:translateX(-130%) rotate(-16deg);opacity:0;';
+const sexes = ['Woman', 'Man', 'Other'];
+return {
+isIntro: s === 'intro',
+isPhone: s === 'phone',
+isInfo: s === 'info',
+isCreating: s === 'creating',
+isWelcome: s === 'welcome',
+showTerms: st.terms,
+isSwipe: s === 'idle' || s === 'like' || s === 'pass',
+isLike: s === 'like',
+isPass: s === 'pass',
+s0: st.slide === 0, s1: st.slide === 1, s2: st.slide === 2, s3: st.slide === 3,
+slideTitle: cur.t,
+slideText: cur.x,
+nextLabel: st.slide === 3 ? 'Get started' : 'Next',
+dots: slides.map((_, i) => ({ bg: i === st.slide ? '#C92F4B' : '#E7CFC8', w: i === st.slide ? '24px' : '8px' })),
+next: () => {
+if (st.slide < 3) this.setState({ slide: st.slide + 1 });
+else this.setState({ stage: 'phone' });
+},
+skip: () => this.setState({ stage: 'phone' }),
+toInfo: () => this.setState({ stage: 'info' }),
+setName: (e) => this.setState({ name: e.target.value }),
+displayName: st.name.trim() || 'there',
+sexOptions: sexes.map((l) => ({
+label: l,
+pressed: st.sex === l,
+bg: st.sex === l ? '#C92F4B' : '#FFFFFF',
+fg: st.sex === l ? '#FFFFFF' : '#2B1B1F',
+border: st.sex === l ? '#C92F4B' : '#E7CFC8',
+pick: () => this.setState({ sex: l })
+})),
+createAccount: () => {
+this.setState({ stage: 'creating' });
+setTimeout(() => this.setState({ stage: 'welcome' }), 1600);
+},
+openTerms: () => this.setState({ terms: true }),
+agree: () => this.setState({ terms: false, stage: 'idle' }),
+cardMove: move,
+profilePhoto: 'https://images.unsplash.com/' + profile.photo + '?auto=format&fit=crop&w=900&q=85',
+profileName: profile.name,
+profileAge: profile.age,
+profileDistance: profile.distance,
+profileBio: profile.bio,
+profileTags: profile.tags,
+like: () => {
+if (this.state.stage !== 'idle') return;
+this.setState({ stage: 'like' });
+setTimeout(() => this.setState({ stage: 'idle', profileIndex: (this.state.profileIndex + 1) % profiles.length }), 650);
+},
+pass: () => {
+if (this.state.stage !== 'idle') return;
+this.setState({ stage: 'pass' });
+setTimeout(() => this.setState({ stage: 'idle', profileIndex: (this.state.profileIndex + 1) % profiles.length }), 650);
+}
+};
+}
+}
+</script>
+</body>
+</html>
