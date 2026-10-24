@@ -180,7 +180,10 @@ svg[width="260"]{width:min(260px,70vw);height:auto}
 <div><b>21. Identity copy.</b> After your identity has been successfully copied, you will lose consciousness and a clone of you will be created.</div>
 <div><b>22. Acceptance.</b> By tapping I AGREE you confirm that you have read, understood and accepted all of the terms above.</div>
 </div>
-<button type="button" onClick="{{agree}}" style="height:68px;border-radius:34px;border:0;background:#C92F4B;color:#FFFFFF;font-size:22px;font-weight:700;letter-spacing:1px">I AGREE</button>
+<div style="display:flex;gap:12px">
+<button type="button" onClick="{{decline}}" style="flex:1;min-width:0;height:56px;border-radius:28px;border:1.5px solid #E7CFC8;background:#FFFFFF;color:#6B5359;font-size:16px;font-weight:700">Decline</button>
+<button type="button" onClick="{{agree}}" style="flex:1;min-width:0;height:56px;border-radius:28px;border:0;background:#C92F4B;color:#FFFFFF;font-size:16px;font-weight:700">I AGREE</button>
+</div>
 </div>
 </sc-if>
 
@@ -232,26 +235,26 @@ renderVals() {
 const st = this.state;
 const s = st.stage;
 const profiles = [
-{ name: 'Maya', age: 24, distance: '2 km away', bio: 'Coffee first, plot twists later.', tags: ['Film nights', 'Night walks', 'Street food'], photo: 'photo-1494790108377-be9c29b29330' },
-{ name: 'Sofia', age: 26, distance: '3 km away', bio: 'Collecting passport stamps and little bookstores.', tags: ['Travel', 'Books', 'Brunch'], photo: 'photo-1534528741775-53994a69daeb' },
-{ name: 'Lia', age: 23, distance: '1 km away', bio: 'Usually outside chasing the golden hour.', tags: ['Photography', 'Hiking', 'Music'], photo: 'photo-1524504388940-b1c1722653e1' },
-{ name: 'Camille', age: 25, distance: '4 km away', bio: 'I make playlists for every possible mood.', tags: ['Live music', 'Art', 'Coffee'], photo: 'photo-1531123897727-8f129e1688ce' },
-{ name: 'Nina', age: 27, distance: '2 km away', bio: 'Beach sunsets and spontaneous road trips.', tags: ['Beach', 'Travel', 'Food'], photo: 'photo-1529139574466-a303027c1d8b' },
-{ name: 'Bea', age: 24, distance: '5 km away', bio: 'Plant mom with a very serious taco ranking.', tags: ['Plants', 'Tacos', 'Movies'], photo: 'photo-1529626455594-4ff0802cfb7e' },
-{ name: 'Ella', age: 28, distance: '3 km away', bio: 'Here for good conversation and better dessert.', tags: ['Baking', 'Museums', 'Dogs'], photo: 'photo-1517841905240-472988babdf9' },
-{ name: 'Rina', age: 22, distance: '1 km away', bio: 'A little bit of yoga, a lot of ramen.', tags: ['Yoga', 'Ramen', 'K-dramas'], photo: 'photo-1508214751196-bcfd4ca60f91' },
-{ name: 'Isabel', age: 26, distance: '6 km away', bio: 'Weekend markets are my happy place.', tags: ['Markets', 'Cooking', 'Design'], photo: 'photo-1524250502761-1ac6f2e30d43' },
-{ name: 'Tala', age: 24, distance: '2 km away', bio: 'Singing loudly is a personality trait.', tags: ['Karaoke', 'Pop', 'Cats'], photo: 'photo-1512316609839-ce289d3eba0a' },
-{ name: 'Chloe', age: 25, distance: '4 km away', bio: 'Trying every cafe in the neighborhood.', tags: ['Coffee', 'Running', 'Comedy'], photo: 'photo-1544005313-94ddf0286df2' },
-{ name: 'Amara', age: 27, distance: '3 km away', bio: 'Art galleries by day, street food by night.', tags: ['Art', 'Food', 'Dancing'], photo: 'photo-1488426862026-3ee34a7d66df' },
-{ name: 'Jules', age: 23, distance: '7 km away', bio: 'Tell me your favorite story and I’m in.', tags: ['Writing', 'Hiking', 'Tea'], photo: 'photo-1521119989659-a83eee488004' },
-{ name: 'Mika', age: 26, distance: '2 km away', bio: 'Dancing in the kitchen is highly encouraged.', tags: ['Dancing', 'Cooking', 'Travel'], photo: 'photo-1516726817505-f5ed825624d8' },
-{ name: 'Zoe', age: 24, distance: '5 km away', bio: 'Big fan of tiny concerts and big dogs.', tags: ['Concerts', 'Dogs', 'Nature'], photo: 'photo-1515886657613-9f3515b0c78f' },
-{ name: 'Ava', age: 28, distance: '3 km away', bio: 'Looking for a partner for Sunday hikes.', tags: ['Hiking', 'Podcasts', 'Coffee'], photo: 'photo-1520813792240-56fc4a3765a7' },
-{ name: 'Dani', age: 22, distance: '1 km away', bio: 'My camera roll is mostly food and friends.', tags: ['Food', 'Photography', 'Friends'], photo: 'photo-1509631179647-0177331693ae' },
-{ name: 'Luna', age: 25, distance: '6 km away', bio: 'Quiet mornings, loud concerts, good company.', tags: ['Music', 'Books', 'Brunch'], photo: 'photo-1503342217505-b0a15ec3261c' },
-{ name: 'Gia', age: 27, distance: '4 km away', bio: 'Always up for a new recipe or a long walk.', tags: ['Cooking', 'Walking', 'Films'], photo: 'photo-1519699047748-de8e457a634e' },
-{ name: 'Noelle', age: 24, distance: '2 km away', bio: 'Making ordinary days a little more fun.', tags: ['Comedy', 'Travel', 'Art'], photo: 'photo-1502685104226-ee32379fefbe' }
+{ name: 'Maya', age: 24, distance: '2 km away', bio: 'Coffee first, plot twists later.', tags: ['Film nights', 'Night walks', 'Street food'], photo: './profiles/filipina-portrait-1.png' },
+{ name: 'Sofia', age: 26, distance: '3 km away', bio: 'Collecting passport stamps and little bookstores.', tags: ['Travel', 'Books', 'Brunch'], photo: './profiles/filipina-portrait-2.png' },
+{ name: 'Lia', age: 23, distance: '1 km away', bio: 'Usually outside chasing the golden hour.', tags: ['Photography', 'Hiking', 'Music'], photo: './profiles/filipina-portrait-3.png' },
+{ name: 'Camille', age: 25, distance: '4 km away', bio: 'I make playlists for every possible mood.', tags: ['Live music', 'Art', 'Coffee'], photo: './profiles/filipina-portrait-4.png' },
+{ name: 'Nina', age: 27, distance: '2 km away', bio: 'Beach sunsets and spontaneous road trips.', tags: ['Beach', 'Travel', 'Food'], photo: './profiles/filipina-portrait-5.png' },
+{ name: 'Bea', age: 24, distance: '5 km away', bio: 'Plant mom with a very serious taco ranking.', tags: ['Plants', 'Tacos', 'Movies'], photo: './profiles/filipina-portrait-6.png' },
+{ name: 'Ella', age: 28, distance: '3 km away', bio: 'Here for good conversation and better dessert.', tags: ['Baking', 'Museums', 'Dogs'], photo: 'https://randomuser.me/api/portraits/women/8.jpg' },
+{ name: 'Rina', age: 22, distance: '1 km away', bio: 'A little bit of yoga, a lot of ramen.', tags: ['Yoga', 'Ramen', 'K-dramas'], photo: 'https://randomuser.me/api/portraits/women/9.jpg' },
+{ name: 'Isabel', age: 26, distance: '6 km away', bio: 'Weekend markets are my happy place.', tags: ['Markets', 'Cooking', 'Design'], photo: 'https://randomuser.me/api/portraits/women/10.jpg' },
+{ name: 'Tala', age: 24, distance: '2 km away', bio: 'Singing loudly is a personality trait.', tags: ['Karaoke', 'Pop', 'Cats'], photo: 'https://randomuser.me/api/portraits/women/11.jpg' },
+{ name: 'Chloe', age: 25, distance: '4 km away', bio: 'Trying every cafe in the neighborhood.', tags: ['Coffee', 'Running', 'Comedy'], photo: 'https://randomuser.me/api/portraits/women/12.jpg' },
+{ name: 'Amara', age: 27, distance: '3 km away', bio: 'Art galleries by day, street food by night.', tags: ['Art', 'Food', 'Dancing'], photo: 'https://randomuser.me/api/portraits/women/14.jpg' },
+{ name: 'Jules', age: 23, distance: '7 km away', bio: 'Tell me your favorite story and I’m in.', tags: ['Writing', 'Hiking', 'Tea'], photo: 'https://randomuser.me/api/portraits/women/15.jpg' },
+{ name: 'Mika', age: 26, distance: '2 km away', bio: 'Dancing in the kitchen is highly encouraged.', tags: ['Dancing', 'Cooking', 'Travel'], photo: 'https://randomuser.me/api/portraits/women/16.jpg' },
+{ name: 'Zoe', age: 24, distance: '5 km away', bio: 'Big fan of tiny concerts and big dogs.', tags: ['Concerts', 'Dogs', 'Nature'], photo: 'https://randomuser.me/api/portraits/women/17.jpg' },
+{ name: 'Ava', age: 28, distance: '3 km away', bio: 'Looking for a partner for Sunday hikes.', tags: ['Hiking', 'Podcasts', 'Coffee'], photo: 'https://randomuser.me/api/portraits/women/18.jpg' },
+{ name: 'Dani', age: 22, distance: '1 km away', bio: 'My camera roll is mostly food and friends.', tags: ['Food', 'Photography', 'Friends'], photo: 'https://randomuser.me/api/portraits/women/19.jpg' },
+{ name: 'Luna', age: 25, distance: '6 km away', bio: 'Quiet mornings, loud concerts, good company.', tags: ['Music', 'Books', 'Brunch'], photo: 'https://randomuser.me/api/portraits/women/20.jpg' },
+{ name: 'Gia', age: 27, distance: '4 km away', bio: 'Always up for a new recipe or a long walk.', tags: ['Cooking', 'Walking', 'Films'], photo: 'https://randomuser.me/api/portraits/women/21.jpg' },
+{ name: 'Noelle', age: 24, distance: '2 km away', bio: 'Making ordinary days a little more fun.', tags: ['Comedy', 'Travel', 'Art'], photo: 'https://randomuser.me/api/portraits/women/22.jpg' }
 ];
 const profile = profiles[st.profileIndex % profiles.length];
 const slides = [
@@ -312,8 +315,9 @@ setTimeout(() => this.setState({ stage: 'welcome' }), 1600);
 },
 openTerms: () => this.setState({ terms: true }),
 agree: () => this.setState({ terms: false, stage: 'idle' }),
+decline: () => this.setState({ terms: false, stage: 'welcome' }),
 cardMove: move,
-profilePhoto: 'https://images.unsplash.com/' + profile.photo + '?auto=format&fit=crop&w=900&q=85',
+profilePhoto: profile.photo,
 profileName: profile.name,
 profileAge: profile.age,
 profileDistance: profile.distance,
