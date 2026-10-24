@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kilig app flow</title>
 <script src="./vendor/react.js"></script>
 <script src="./vendor/react-dom.js"></script>
@@ -13,11 +14,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Fraunces:opsz,wght@9..144,600&amp;display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:'DM Sans',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{width:100%;min-height:100%;margin:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#FFF6F1}
+x-dc{display:block;width:100%;min-height:100vh;min-height:100dvh}
+#dc-root{width:100%;min-height:100vh;min-height:100dvh}
+#dc-root>.sc-host{width:100%;min-height:100vh;min-height:100dvh}
 button,input{font-family:inherit}
 button{cursor:pointer}
 input::placeholder{color:#6B5359}
 @keyframes kspin{to{transform:rotate(360deg)}}
+[style*="390px"][style*="844px"]{width:100%!important;max-width:390px;height:100vh!important;height:100dvh!important;margin:0 auto}
+svg[width="260"]{width:min(260px,70vw);height:auto}
+[role="dialog"]{width:100%!important;max-width:390px;height:min(664px,85vh)!important;height:min(664px,85dvh)!important}
+@media(max-height:700px){
+  [style*="padding: 28px 24px 36px"]{padding:16px 20px 20px!important}
+  [style*="padding: 28px 16px 32px"]{padding:16px 12px!important}
+  [style*="gap: 20px"]{gap:12px!important}
+  [style*="gap: 28px"]{gap:16px!important}
+  [style*="gap: 40px"][style*="padding-top: 20px"]{gap:24px!important;padding-top:12px!important}
+  [style*="padding: 28px 24px 28px"]{padding:20px 16px!important}
+  [style*="390px"][style*="844px"]{overflow-y:auto}
+}
+@media(max-width:340px){
+  [style*="padding: 28px 24px 36px"]{padding-left:16px!important;padding-right:16px!important}
+  [style*="padding: 28px 16px 32px"]{padding-left:10px!important;padding-right:10px!important}
+}
 </style>
 </helmet>
 <div style="width:390px;height:844px;position:relative;overflow:hidden;background:#FFF6F1;color:#2B1B1F">
@@ -167,7 +189,7 @@ input::placeholder{color:#6B5359}
 <div style="display:flex;align-items:center;justify-content:center;padding:0 4px 14px 4px">
 <span style="font-family:'Fraunces',serif;font-weight:600;font-size:30px;color:#C92F4B;letter-spacing:-0.5px">kilig</span>
 </div>
-<div style="flex:1;min-height:0;border-radius:28px;background:#5E2B36;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;transition:transform 0.45s ease,opacity 0.45s ease;{{cardMove}}">
+<div onPointerDown="{{swipeStart}}" onPointerUp="{{swipeEnd}}" onPointerCancel="{{swipeCancel}}" style="flex:1;min-height:0;border-radius:28px;background:#5E2B36;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;touch-action:pan-y;transition:transform 0.45s ease,opacity 0.45s ease;{{cardMove}}">
 <img src="{{profilePhoto}}" alt="Portrait of {{profileName}}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%">
 <div style="position:absolute;inset:40% 0 0;background:linear-gradient(180deg,transparent 0%,rgba(43,18,25,0.12) 32%,#2B1219 100%);pointer-events:none"></div>
 <div style="position:absolute;top:16px;left:16px;background:#FFF6F1;color:#2B1B1F;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700">{{profileDistance}}</div>
@@ -243,6 +265,16 @@ let move = '';
 if (s === 'like') move = 'transform:translateX(130%) rotate(16deg);opacity:0;';
 if (s === 'pass') move = 'transform:translateX(-130%) rotate(-16deg);opacity:0;';
 const sexes = ['Woman', 'Man', 'Other'];
+const like = () => {
+if (this.state.stage !== 'idle') return;
+this.setState({ stage: 'like' });
+setTimeout(() => this.setState({ stage: 'idle', profileIndex: (this.state.profileIndex + 1) % profiles.length }), 650);
+};
+const pass = () => {
+if (this.state.stage !== 'idle') return;
+this.setState({ stage: 'pass' });
+setTimeout(() => this.setState({ stage: 'idle', profileIndex: (this.state.profileIndex + 1) % profiles.length }), 650);
+};
 return {
 isIntro: s === 'intro',
 isPhone: s === 'phone',
@@ -287,16 +319,25 @@ profileAge: profile.age,
 profileDistance: profile.distance,
 profileBio: profile.bio,
 profileTags: profile.tags,
-like: () => {
-if (this.state.stage !== 'idle') return;
-this.setState({ stage: 'like' });
-setTimeout(() => this.setState({ stage: 'idle', profileIndex: (this.state.profileIndex + 1) % profiles.length }), 650);
+swipeStart: (e) => {
+if (e.pointerType === 'mouse' && e.button !== 0) return;
+this.swipeStartPoint = { x: e.clientX, y: e.clientY };
 },
-pass: () => {
-if (this.state.stage !== 'idle') return;
-this.setState({ stage: 'pass' });
-setTimeout(() => this.setState({ stage: 'idle', profileIndex: (this.state.profileIndex + 1) % profiles.length }), 650);
-}
+swipeEnd: (e) => {
+const start = this.swipeStartPoint;
+this.swipeStartPoint = null;
+if (!start || this.state.stage !== 'idle') return;
+const deltaX = e.clientX - start.x;
+const deltaY = e.clientY - start.y;
+if (Math.abs(deltaX) < 60 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+if (deltaX > 0) like();
+else pass();
+},
+swipeCancel: () => {
+this.swipeStartPoint = null;
+},
+like,
+pass
 };
 }
 }
