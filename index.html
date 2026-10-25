@@ -194,7 +194,9 @@ svg[width="260"]{width:min(260px,70vw);height:auto}
 <span style="font-family:'Fraunces',serif;font-weight:600;font-size:30px;color:#C92F4B;letter-spacing:-0.5px">kilig</span>
 </div>
 <div onPointerDown="{{swipeStart}}" onPointerUp="{{swipeEnd}}" onPointerCancel="{{swipeCancel}}" style="flex:1;min-height:0;border-radius:28px;background:#5E2B36;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;touch-action:pan-y;transition:transform 0.45s ease,opacity 0.45s ease;{{cardMove}}">
+<sc-if value="{{hasProfilePhoto}}" hint-placeholder-val="{{ false }}">
 <img src="{{profilePhoto}}" alt="Portrait of {{profileName}}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%">
+</sc-if>
 <div style="position:absolute;inset:40% 0 0;background:linear-gradient(180deg,transparent 0%,rgba(43,18,25,0.12) 32%,#2B1219 100%);pointer-events:none"></div>
 <div style="position:absolute;top:16px;left:16px;background:#FFF6F1;color:#2B1B1F;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700">{{profileDistance}}</div>
 <sc-if value="{{isLike}}" hint-placeholder-val="{{ false }}">
@@ -241,7 +243,6 @@ const profiles = [
 { name: 'Lia', age: 23, distance: '1 km away', bio: 'Usually outside chasing the golden hour.', tags: ['Photography', 'Hiking', 'Music'], photo: './profiles/filipina-portrait-3.png' },
 { name: 'Camille', age: 25, distance: '4 km away', bio: 'I make playlists for every possible mood.', tags: ['Live music', 'Art', 'Coffee'], photo: './profiles/filipina-portrait-4.png' },
 { name: 'Nina', age: 27, distance: '2 km away', bio: 'Beach sunsets and spontaneous road trips.', tags: ['Beach', 'Travel', 'Food'], photo: './profiles/filipina-portrait-5.png' },
-{ name: 'Bea', age: 24, distance: '5 km away', bio: 'Plant mom with a very serious taco ranking.', tags: ['Plants', 'Tacos', 'Movies'], photo: './profiles/filipina-portrait-6.png' },
 { name: 'Ella', age: 28, distance: '3 km away', bio: 'Here for good conversation and better dessert.', tags: ['Baking', 'Museums', 'Dogs'], photo: 'https://randomuser.me/api/portraits/women/8.jpg' },
 { name: 'Rina', age: 22, distance: '1 km away', bio: 'A little bit of yoga, a lot of ramen.', tags: ['Yoga', 'Ramen', 'K-dramas'], photo: 'https://randomuser.me/api/portraits/women/9.jpg' },
 { name: 'Isabel', age: 26, distance: '6 km away', bio: 'Weekend markets are my happy place.', tags: ['Markets', 'Cooking', 'Design'], photo: 'https://randomuser.me/api/portraits/women/10.jpg' },
@@ -319,6 +320,7 @@ agree: () => this.setState({ terms: false, stage: 'idle' }),
 decline: () => this.setState({ terms: false, stage: 'welcome' }),
 cardMove: move,
 profilePhoto: profile.photo,
+hasProfilePhoto: Boolean(profile.photo),
 profileName: profile.name,
 profileAge: profile.age,
 profileDistance: profile.distance,
